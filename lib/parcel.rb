@@ -10,7 +10,7 @@ class Parcel
 
   define_method(:volume) do
     volume = @length.*(@width).*(@height)
-    volume
+    volume.round(2)
   end
 
   define_method(:cost_to_ship) do

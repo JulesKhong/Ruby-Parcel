@@ -19,5 +19,26 @@ describe(Parcel) do
       test_package = Parcel.new(4, 4, 12, 1, 10, 'standard')
       expect(test_package.cost_to_ship()).to (eq(14.80))
     end
+
+    it('returns a price of $15.80 for a package that has a volume of 192, and a weight of 3lbs') do
+      test_package = Parcel.new(4, 4, 12, 3, 10, 'standard')
+      expect(test_package.cost_to_ship()).to (eq(15.80))
+    end
+
+    it('returns a price of $16.30 for a package that has a volume of 192, and a weight of 3.5lbs') do
+      test_package = Parcel.new(4, 4, 12, 3.5, 10, 'standard')
+      expect(test_package.cost_to_ship()).to (eq(16.30))
+    end
+
+    it('returns a price of $21.46 for a package that has a volume of 258.64, and a weight of 2lbs') do
+      test_package = Parcel.new(4.5, 4.75, 12.1, 2, 10, 'standard')
+      expect(test_package.cost_to_ship()).to (eq(21.46))
+    end
+
+    it('returns a price of $21.46 for a package that has a volume of 258.64, and a weight of 2lbs, and a distance of 600 miles') do
+      test_package = Parcel.new(4.5, 4.75, 12.1, 2, 600, 'standard')
+      expect(test_package.cost_to_ship()).to (eq(22.46))
+    end
+
   end
 end
