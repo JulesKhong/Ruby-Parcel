@@ -1,3 +1,5 @@
+require('pry')
+
 class Parcel
   define_method(:initialize) do |flat_rate, width, height, length, weight, distance, speed, wrapping|
     @width = width.to_f()
@@ -8,6 +10,7 @@ class Parcel
     @speed = speed
     @wrapping = wrapping
     @flat_rate = flat_rate
+    @time = Time.new()
   end
 
   define_method(:volume) do
@@ -20,19 +23,29 @@ class Parcel
     surface.round(2)
     end
 
+  define_method(:holiday?) do
+    if (@time.month() == 11) && (@time.day() >= 24)
+      true
+    elsif (@time.month() == 12)
+      true
+    else
+      false
+    end
+  end
+
   define_method(:cost_to_ship) do
     price = 10.00
-    if @flat_rate == "flat_small"
+    if @flat_rate == "small"
       price = 6.80
       @length = 8.625
       @width = 5.375
       @height = 1.625
-    elsif @flat_rate == "flat_medium"
+    elsif @flat_rate == "medium"
       price = 13.45
       @length = 13.625
       @width = 11.875
       @height = 3.375
-    elsif @flat_rate == "flat_large"
+    elsif @flat_rate == "large"
       price = 18.75
       @length = 23.6875
       @width = 11.75
@@ -53,9 +66,12 @@ class Parcel
       elsif @speed == "overnight"
         price = price.+(20)
       end
-      if @wrapping
+      if @wrapping == "yes"
         price = price.+(((self.surface())./(1296)).*(5))
       end
-    price.round(2)
+      if self.holiday?()
+        price = price.+(5)
+      end
+    '%.2f' % price.round(2)
   end
 end
