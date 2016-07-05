@@ -67,5 +67,10 @@ describe(Parcel) do
       test_package = Parcel.new('flat_small', 8.625, 5.375, 1.625, 2, 600, 'standard', false)
       expect(test_package.cost_to_ship()).to (eq(6.80))
     end
+
+    it('returns a price of $33.45 for a package in a medium flat-rate box with overnight delivery') do
+      test_package = Parcel.new('flat_medium', 8.625, 5.375, 1.625, 2, 600, 'overnight', false)
+      expect(test_package.cost_to_ship()).to (eq(33.45))
+    end
   end
 end
