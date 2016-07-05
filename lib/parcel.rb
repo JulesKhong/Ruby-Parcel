@@ -1,5 +1,5 @@
 class Parcel
-  define_method(:initialize) do |width, height, length, weight, distance, speed, wrapping|
+  define_method(:initialize) do |flat_rate, width, height, length, weight, distance, speed, wrapping|
     @width = width.to_f()
     @height = height.to_f()
     @length = length.to_f()
@@ -7,6 +7,7 @@ class Parcel
     @distance = distance.to_f()
     @speed = speed
     @wrapping = wrapping
+    @flat_rate = flat_rate
   end
 
   define_method(:volume) do
@@ -21,17 +22,17 @@ class Parcel
 
   define_method(:cost_to_ship) do
     price = 10.00
-    if @flat == "small"
+    if @flat_rate == "flat_small"
       price = 6.80
       @length = 8.625
       @width = 5.375
       @height = 1.625
-    elsif @flat == "medium"
+    elsif @flat_rate == "flat_medium"
       price = 13.45
       @length = 13.625
       @width = 11.875
       @height = 3.375
-    elsif @flat == "large"
+    elsif @flat_rate == "flat_large"
       price = 18.75
       @length = 23.6875
       @width = 11.75
